@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyProdutApp.Views.AddProductPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="nameEntry"
+               Placeholder="Product name" />
+            <Entry x:Name="priceEntry"
+               Placeholder="product price" />
+            <Entry x:Name="quantityEntry"
+               Placeholder="product quantity" />
+            <Button Text="Add product"
+                BackgroundColor="#56cfe1" TextColor="#fff" Clicked="AddProductButton" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -32,6 +32,12 @@ namespace MyProdutApp.Services
             return _database.InsertAsync(product);
         }
 
+        public Task<int> UpdateProductAsync(Product product)
+        {
+            return _database.UpdateAsync(product);
+        }
+
+
         public Task<int> DeleteProductAsync(Product product)
         {
             

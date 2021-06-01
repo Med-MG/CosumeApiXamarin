@@ -3,15 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyProdutApp.Views.AddProductPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="nameEntry"
-               Placeholder="Product name" />
-            <Entry x:Name="priceEntry"
-               Placeholder="product price" />
-            <Entry x:Name="quantityEntry"
-               Placeholder="product quantity" />
-            <Button Text="Add product"
-                BackgroundColor="#56cfe1" TextColor="#fff" Clicked="AddProductButton" />
-        </StackLayout>
+
+     
+                    <StackLayout>
+                        <Entry x:Name="nameEntry" Placeholder="Product name" Text=""  />
+                         <Entry x:Name="priceEntry" Placeholder="product price" Text=""  />
+            <Entry x:Name="quantityEntry" Placeholder="product quantity" Text=""  />
+                        <Button x:Name="SubmitBtn" Text="Add product" BackgroundColor="#56cfe1" TextColor="#fff" Clicked="AddOrUpdateProductButton" />
+                    </StackLayout>
+                
     </ContentPage.Content>
 </ContentPage>

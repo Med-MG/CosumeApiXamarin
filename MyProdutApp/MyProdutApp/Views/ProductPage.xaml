@@ -15,10 +15,11 @@
                                                CommandParameter="{Binding ID}"
                                                 IconImageSource="edit.png"
                                                 BackgroundColor="LightBlue"
+                                                Clicked="UpdateProduct"
                                                 />
                                     <SwipeItem Text="Delete"
                                          CommandParameter="{Binding ID}"
-                                        IconImageSource="trash.png"
+                                         IconImageSource="trash.png"
                                          BackgroundColor="LightPink"
                                       
                                           Clicked="DeleteProduct"

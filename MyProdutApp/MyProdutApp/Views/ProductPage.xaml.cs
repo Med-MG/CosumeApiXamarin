@@ -32,10 +32,10 @@ namespace MyProdutApp.Views
                 string ID = (sender as SwipeItem).CommandParameter.ToString();
                 if (!string.IsNullOrWhiteSpace(ID))
                 {
-                    var product = App.Database.GetSingleProduct(int.Parse(ID));
-                    var result = await DisplayAlert("Confirm", "Do you want to delete Product: " + product.Result.Name.ToString() + "?", "Yes", "No");
+                    var product = await App.Database.GetSingleProduct(int.Parse(ID));
+                    var result = await DisplayAlert("Confirm", "Do you want to delete Product: " + product.Name.ToString() + "?", "Yes", "No");
                     if (result)
-                       await App.Database.DeleteProductAsync(product.Result);
+                       await App.Database.DeleteProductAsync(product);
                        OnAppearing();
                 }
             }
@@ -45,6 +45,25 @@ namespace MyProdutApp.Views
             }
         }
 
- 
+
+        private async void  UpdateProduct(object sender, EventArgs e)
+        {
+            try
+            {
+                string ID = (sender as SwipeItem).CommandParameter.ToString();
+                if (!string.IsNullOrWhiteSpace(ID))
+                {
+                    var product = await App.Database.GetSingleProduct(int.Parse(ID));
+                    //var result = await DisplayAlert("Confirm", "Product: " + product.Name + "?", "Yes", "No");
+                    var UpdatePage = new AddProductPage(product);
+                    await Navigation.PushAsync(UpdatePage);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
     }
 }

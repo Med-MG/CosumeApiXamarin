@@ -14,6 +14,7 @@ namespace MyProdutApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductPage : ContentPage
     {
+       
         public ProductPage()
         {
             InitializeComponent();
@@ -22,7 +23,8 @@ namespace MyProdutApp.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            collectionView.ItemsSource = await App.Database.GetProducts();
+            collectionView.ItemsSource = ChangeImageType(await App.Database.GetProducts());
+            
         }
 
         private async void DeleteProduct(object sender, EventArgs e)
@@ -63,6 +65,18 @@ namespace MyProdutApp.Views
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public List<ProductReturn> ChangeImageType(List<Product> ListProd)
+        {
+             List<ProductReturn> ProdToshow = new List<ProductReturn>();
+
+            foreach (var product in ListProd)
+            {
+                ProdToshow.Add(new ProductReturn(product));
+            }
+
+            return ProdToshow;
         }
 
     }

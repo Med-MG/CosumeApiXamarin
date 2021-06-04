@@ -9,8 +9,10 @@
                         <Entry x:Name="nameEntry" Placeholder="Product name" Text=""  />
                          <Entry x:Name="priceEntry" Placeholder="product price" Text=""  />
             <Entry x:Name="quantityEntry" Placeholder="product quantity" Text=""  />
-                        <Button x:Name="SubmitBtn" Text="Add product" BackgroundColor="#56cfe1" TextColor="#fff" Clicked="AddOrUpdateProductButton" />
-                    </StackLayout>
+            <Button x:Name="UploadBtn" Text="Upload photo" BackgroundColor="#fca311" TextColor="#fff" Clicked="UploadImage" />
+
+            <Button x:Name="SubmitBtn" Text="Add product" BackgroundColor="#56cfe1" TextColor="#fff" Clicked="AddOrUpdateProductButton" />  
+        </StackLayout>
                 
     </ContentPage.Content>
 </ContentPage>

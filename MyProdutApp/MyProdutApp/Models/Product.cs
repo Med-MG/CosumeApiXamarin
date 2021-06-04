@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace MyProdutApp.Models
 {
@@ -12,5 +13,6 @@ namespace MyProdutApp.Models
         public string Name { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }
+        public string Image { get; set; }
     }
 }

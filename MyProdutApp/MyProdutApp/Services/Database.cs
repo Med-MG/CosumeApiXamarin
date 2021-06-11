@@ -24,7 +24,7 @@ namespace MyProdutApp.Services
 
         public Task<Product> GetSingleProduct(int ID)
         {
-            return _database.Table<Product>().Where(x => x.ID == ID).FirstOrDefaultAsync();
+            return _database.Table<Product>().Where(x => x.Id == ID).FirstOrDefaultAsync();
         }
 
         public Task<int> SaveProductAsync(Product product)

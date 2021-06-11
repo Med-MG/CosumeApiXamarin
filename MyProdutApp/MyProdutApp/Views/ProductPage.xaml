@@ -12,13 +12,13 @@
                             <SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem Text="Edit"
-                                               CommandParameter="{Binding ID}"
+                                               CommandParameter="{Binding Id}"
                                                 IconImageSource="edit.png"
                                                 BackgroundColor="LightBlue"
                                                 Clicked="UpdateProduct"
                                                 />
                                     <SwipeItem Text="Delete"
-                                         CommandParameter="{Binding ID}"
+                                         CommandParameter="{Binding Id}"
                                          IconImageSource="trash.png"
                                          BackgroundColor="LightPink"
                                       

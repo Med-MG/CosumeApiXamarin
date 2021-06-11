@@ -1,4 +1,5 @@
 ﻿using MyProdutApp.Models;
+using MyProdutApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,16 +15,19 @@ namespace MyProdutApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductPage : ContentPage
     {
-       
+        private IWebAPIService _webAPIService;
+
         public ProductPage()
         {
             InitializeComponent();
+            _webAPIService = new WebAPIService();
+
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            collectionView.ItemsSource = ChangeImageType(await App.Database.GetProducts());
+            collectionView.ItemsSource = ChangeImageType(await _webAPIService.RefreshDataAsync());
             
         }
 
@@ -34,10 +38,10 @@ namespace MyProdutApp.Views
                 string ID = (sender as SwipeItem).CommandParameter.ToString();
                 if (!string.IsNullOrWhiteSpace(ID))
                 {
-                    var product = await App.Database.GetSingleProduct(int.Parse(ID));
+                    var product = await _webAPIService.GetSingleProduct(ID);
                     var result = await DisplayAlert("Confirm", "Do you want to delete Product: " + product.Name.ToString() + "?", "Yes", "No");
                     if (result)
-                       await App.Database.DeleteProductAsync(product);
+                       await _webAPIService.DeleteProductAsync(product);
                        OnAppearing();
                 }
             }
@@ -55,7 +59,7 @@ namespace MyProdutApp.Views
                 string ID = (sender as SwipeItem).CommandParameter.ToString();
                 if (!string.IsNullOrWhiteSpace(ID))
                 {
-                    var product = await App.Database.GetSingleProduct(int.Parse(ID));
+                    var product = await _webAPIService.GetSingleProduct(ID);
                     //var result = await DisplayAlert("Confirm", "Product: " + product.Name + "?", "Yes", "No");
                     var UpdatePage = new AddProductPage(product);
                     await Navigation.PushAsync(UpdatePage);

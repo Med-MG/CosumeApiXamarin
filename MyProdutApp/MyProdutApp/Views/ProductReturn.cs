@@ -6,7 +6,7 @@ namespace MyProdutApp.Views
     public class ProductReturn
     {
 
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }
@@ -14,7 +14,7 @@ namespace MyProdutApp.Views
 
         public ProductReturn(Product product)
         {
-            this.ID = product.ID;
+            this.Id = product.Id;
             this.Name = product.Name;
             this.Price = product.Price;
             this.Quantity = product.Quantity;

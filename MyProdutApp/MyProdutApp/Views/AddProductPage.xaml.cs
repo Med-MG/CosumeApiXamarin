@@ -1,27 +1,23 @@
-﻿using Android;
-using Android.OS;
-using MyProdutApp.Models;
+﻿using MyProdutApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Runtime;
-using Android.Widget;
-using Android.Graphics;
+
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using MyProdutApp.Services;
 
 namespace MyProdutApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddProductPage : ContentPage
     {
-       
+        private IWebAPIService _webAPIService;
         public bool _UpdateMode { get; set; }
         public int _ProductToUpdate { get; set; }
         public string _ImageFile { get; set; }
@@ -30,30 +26,25 @@ namespace MyProdutApp.Views
         {
             InitializeComponent();
             _UpdateMode = false;
+            _webAPIService = new WebAPIService();
             //RequestPermissions(permissionGroup, 0);
         }
         
         public AddProductPage(Product product)
         {
             InitializeComponent();
-
+            _webAPIService = new WebAPIService();
             if (product != null)
             {
                 nameEntry.Text = product.Name;
                 priceEntry.Text = product.Price.ToString();
                 quantityEntry.Text = product.Quantity.ToString();
                 SubmitBtn.Text = "Update Product";
-                _ProductToUpdate = product.ID;
+                _ProductToUpdate = product.Id;
                 _UpdateMode = true;
             }
         }
 
-        readonly string[] permissionGroup =
-{
-            Manifest.Permission.ReadExternalStorage,
-            Manifest.Permission.WriteExternalStorage,
-            Manifest.Permission.Camera
-        };
 
 
         async void AddOrUpdateProductButton(object sender, EventArgs e)
@@ -61,14 +52,14 @@ namespace MyProdutApp.Views
             
             if(_UpdateMode)
             {
-                await App.Database.UpdateProductAsync(new Product
+                await _webAPIService.SaveProductAsync(new Product
                 {
-                    ID = _ProductToUpdate,
+                    Id = _ProductToUpdate,
                     Name = nameEntry.Text,
                     Price = int.Parse(priceEntry.Text),
                     Quantity = int.Parse(quantityEntry.Text),
                     Image = _ImageFile
-                });
+                }, _UpdateMode);
 
                 await Navigation.PushAsync(new ProductPage());
                 
@@ -76,13 +67,13 @@ namespace MyProdutApp.Views
 
             if (!string.IsNullOrWhiteSpace(nameEntry.Text) && !string.IsNullOrWhiteSpace(priceEntry.Text) && !string.IsNullOrWhiteSpace(quantityEntry.Text) && !_UpdateMode)
             {
-                await App.Database.SaveProductAsync(new Product
+                await _webAPIService.SaveProductAsync(new Product
                 {
                     Name = nameEntry.Text,
                     Price = int.Parse(priceEntry.Text),
                     Quantity = int.Parse(quantityEntry.Text),
                     Image = _ImageFile
-                });
+                }, _UpdateMode);
 
                 nameEntry.Text = priceEntry.Text = quantityEntry.Text = string.Empty;
                 await Navigation.PushAsync(new ProductPage());
